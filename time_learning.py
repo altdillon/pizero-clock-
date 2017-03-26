@@ -6,13 +6,18 @@
 
 import time
 import datetime
+import json
 from listevents import getWakeupEvent
 
 
 
 if __name__ == "__main__":
-    print(getWakeupEvent().time().hour)
-    print(getWakeupEvent().time().minute)
-    print(getWakeupEvent().time().second)
+    #print(getWakeupEvent().time().hour)
+    #print(getWakeupEvent().time().minute)
+    #print(getWakeupEvent().time().second)
     #print(getWakeupEvent().time().time)
-    now=datetime.now(time.time())
+    now=datetime.datetime.now()
+    a=json.dumps({"timestamp":str(time.time()),"savetime":str(now)})
+    print(a)
+    b=json.loads(a) # returns a dictionary 
+    print(b["savetime"])
