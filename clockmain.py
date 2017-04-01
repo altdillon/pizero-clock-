@@ -1,4 +1,6 @@
-from listevents import getWakeupEvent
+from digitobj import Digit # import the digit class
+from displayobj import Display # input the display class
+from listevents import getWakeupEvent # import get wakeup event
 import dateutil.parser
 import datetime
 import time
@@ -79,13 +81,24 @@ class AlarmClock:
 #     jsondata=json.dumps(['wakeuptime',nextAlarm])
 
 
-def main():
+def main_loop():
     alarmclock=AlarmClock()
     #alarmclock.update_time_file() # test call for update_time_file
-    alarmclock.update_clock_display() # test call for updateing the clock display
-    alarmclock.init_alarm_ring() # test to init alarm ring 
+    #alarmclock.update_clock_display() # test call for updateing the clock display
+    alarmclock.init_alarm_ring() # test to init alarm ring
+    # new up 4 digit objects for the 4 clock displays
+    d_one=Digit(8,1)
+	d_two=Digit(9,2)
+	d_three=Digit(7,3)
+	d_four=Digit(0,4)
+    # new up a display object, with the digit objects
+    clockdisplay=Display([d_one,d_two,d_three,d_four])
 
+    # main loop, this is really starting to smell like a micro controller program!
+    while True:
+        clock.set_displayvalue(alarmclock.update_clock_display()) # update the values with the current time
+        clock.draw_bus()
 
 # weird if statment that python needs to run it's main function
 if __name__ == "__main__":
-    main()
+    main_loop()
