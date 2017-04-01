@@ -88,16 +88,16 @@ def main_loop():
     #alarmclock.init_alarm_ring() # test to init alarm ring
     # new up 4 digit objects for the 4 clock displays
     d_one=Digit(8,1)
-	d_two=Digit(9,2)
-	d_three=Digit(7,3)
-	d_four=Digit(0,4)
+    d_two=Digit(9,2)
+    d_three=Digit(7,3)
+    d_four=Digit(0,4)
     # new up a display object, with the digit objects
     clockdisplay=Display([d_one,d_two,d_three,d_four])
 
     # main loop, this is really starting to smell like a micro controller program!
     while True:
-        clock.set_displayvalue(alarmclock.update_clock_display()) # update the values with the current time
-        clock.draw_bus()
+        clockdisplay.set_displayvalue(alarmclock.update_clock_display()) # update the values with the current time
+        clockdisplay.draw_bus()
 
 # weird if statment that python needs to run it's main function
 if __name__ == "__main__":
