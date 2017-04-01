@@ -14,7 +14,7 @@ class AlarmClock:
         self.filename="lasttime.json"
         self.currentTime=[8,8,8,8] # set the defult value
         self.ringTime=None # defult value for ring time; ring time will hold a value of type datetime
-        self.update_time_file() # update or create the time file when the program starts
+        #self.update_time_file() # update or create the time file when the program starts
 
     def update_clock_display(self): # update the current time digit list with the current time; usehalftime is true if the clock is running in 12 hour time
         now=datetime.datetime.now() #get the current time and date
@@ -85,7 +85,7 @@ def main_loop():
     alarmclock=AlarmClock()
     #alarmclock.update_time_file() # test call for update_time_file
     #alarmclock.update_clock_display() # test call for updateing the clock display
-    alarmclock.init_alarm_ring() # test to init alarm ring
+    #alarmclock.init_alarm_ring() # test to init alarm ring
     # new up 4 digit objects for the 4 clock displays
     d_one=Digit(8,1)
 	d_two=Digit(9,2)
