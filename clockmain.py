@@ -10,6 +10,14 @@ class AlarmClock:
 
     def __init__ (self):
         self.filename="lasttime.json"
+        self.currentTime=[8,8,8,8] # set the defult value
+
+    def update_clock_display(self): # update the current time digit list with the current time; usehalftime is true if the clock is running in 12 hour time
+        now=datetime.datetime.now() #get the current time and date
+        # break it down into seconds minutes and hours and put it into the current time list
+        self.currentTime=[now.hour/10,now.hour%10,now.minute/10,now.minute%10]
+        #print(self.currentTime)
+        return self.currentTime
 
     def update_time_file(self):
         # see if a file containging the last alarm time exists, if not then get the current time and update it to the new file
@@ -43,8 +51,6 @@ class AlarmClock:
             filenameIO.write(jsonbuffer)
             filenameIO.close()
 
-        #filenameIO.close()
-
 
 #from digitobj import Digit # import the digit class
 #from displayobj import Display # input the display class
@@ -57,7 +63,8 @@ class AlarmClock:
 
 def main():
     alarmclock=AlarmClock()
-    alarmclock.update_time_file()
+    #alarmclock.update_time_file() # test call for update_time_file
+    alarmclock.update_clock_display() # test call for updateing the clock display
 
 
 # weird if statment that python needs to run it's main function
