@@ -11,6 +11,8 @@ class AlarmClock:
     def __init__ (self):
         self.filename="lasttime.json"
         self.currentTime=[8,8,8,8] # set the defult value
+        self.ringTime=None # defult value for ring time; ring time will hold a value of type datetime
+        self.update_time_file() # update or create the time file when the program starts
 
     def update_clock_display(self): # update the current time digit list with the current time; usehalftime is true if the clock is running in 12 hour time
         now=datetime.datetime.now() #get the current time and date
@@ -18,6 +20,21 @@ class AlarmClock:
         self.currentTime=[now.hour/10,now.hour%10,now.minute/10,now.minute%10]
         #print(self.currentTime)
         return self.currentTime
+
+    # init the event callback that's responcable for checking the alarm
+    def init_alarm_ring(self):
+        s = sched.scheduler(time.time, time.sleep) # thread scheduler object
+        # setup the event that will see if the alarm is going to be able to run or not
+        def _check_alarm(): # * not at all tested as of 2am 4/1/2017
+            if self.ringTime: # if ringTime is defined
+                if datetime.datetime.now() - self.ringTime < 3: # if the current time is +- 4 seconds from now
+                    print("ring!!!!") # place holder for the api call to ring the alarm
+                s.enter(1,1,_check_alarm,()) # re add this function to the queue
+
+        # enter the inital callback for _check_alarm
+        s.enter(1,1,_check_alarm,())
+
+
 
     def update_time_file(self):
         # see if a file containging the last alarm time exists, if not then get the current time and update it to the new file
@@ -36,6 +53,7 @@ class AlarmClock:
                 filenameIO=open(self.filename,"w+")
                 # update the time and write it to the json file
                 wakeupevent=getWakeupEvent() # update the wakeup event from the server
+                self.ringTime=wakeupevent # assign the data pulled from google calander
                 newjsondata={"timestamp":str(datetime.datetime.now()),"savetime":wakeupevent.__str__()}
                 filenameIO.write(json.dumps(newjsondata))
 
@@ -65,6 +83,7 @@ def main():
     alarmclock=AlarmClock()
     #alarmclock.update_time_file() # test call for update_time_file
     alarmclock.update_clock_display() # test call for updateing the clock display
+    alarmclock.init_alarm_ring() # test to init alarm ring 
 
 
 # weird if statment that python needs to run it's main function
