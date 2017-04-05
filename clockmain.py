@@ -97,7 +97,7 @@ def main_loop():
     # main loop, this is really starting to smell like a micro controller program!
     while True:
         clockdisplay.set_displayvalue(alarmclock.update_clock_display()) # update the values with the current time
-        clockdisplay.draw_bus()
+        clockdisplay.draw_bus() # update the current time to the display bus 
 
 # weird if statment that python needs to run it's main function
 if __name__ == "__main__":
