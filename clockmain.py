@@ -42,7 +42,7 @@ class AlarmClock:
             #see if the current is with +- 1 second of the time that the object has saved
             now=datetime.datetime.now()
             if now == self.ringTime :  # this makes my common sence tingle, this might make some trouble in the future
-                out=true 
+                out=true
 
         return out
 
@@ -91,8 +91,10 @@ class AlarmClock:
 
 
 def main_loop():
+    # init all the objects that we'll need for running an alarm clock
     alarmclock=AlarmClock()
-    alarmclock.update_time_file() # test call for update_time_file
+    s = sched.scheduler(time.time, time.sleep)
+    #alarmclock.update_time_file() # test call for update_time_file
     #alarmclock.update_clock_display() # test call for updateing the clock display
     #alarmclock.init_alarm_ring() # test to init alarm ring
     # new up 4 digit objects for the 4 clock displays
@@ -102,6 +104,17 @@ def main_loop():
     d_four=Digit(0,4)
     # new up a display object, with the digit objects
     clockdisplay=Display([d_one,d_two,d_three,d_four])
+
+    # setup events for geting time from google api and seeing if it's time to getup
+    def update_wakeup_from_googleapi():
+        alarmclock.update_time_file()
+        s.enter(30,1,update_wakeup_from_googleapi,()) # re add event to the event que
+
+    def check_wakeup():
+        if alarmclock.read_time() :
+            clockdisplay.play_buzzer(5) # play buzzer for 5 seconds
+
+    # todo next time this code is editied: init the event que for the two nested methods 
 
     # main loop, this is really starting to smell like a micro controller program!
     while True:
