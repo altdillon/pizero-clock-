@@ -27,12 +27,15 @@ def get_credentials():
     Returns:
         Credentials, the obtained credential.
     """
-    home_dir = os.path.expanduser('~')
-    credential_dir = os.path.join(home_dir, '.credentials')
-    if not os.path.exists(credential_dir):
-        os.makedirs(credential_dir)
-    credential_path = os.path.join(credential_dir,
-                                   'calendar-python-quickstart.json')
+    # normal, sane way of doing this that really shouldn't be changed
+    #home_dir = os.path.expanduser('~')
+    #credential_dir = os.path.join(home_dir, '.credentials')
+    #if not os.path.exists(credential_dir):
+    #    os.makedirs(credential_dir)
+    #credential_path = os.path.join(credential_dir,'calendar-python-quickstart.json')
+
+    # stupid hacky way that I came up with to fix an issue with running this app as root
+    credential_path = os.path.join('.credentials','calendar-python-quickstart.json') 
 
     store = Storage(credential_path)
     credentials = store.get()
