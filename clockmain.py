@@ -83,7 +83,7 @@ class AlarmClock:
 
 def main_loop():
     alarmclock=AlarmClock()
-    #alarmclock.update_time_file() # test call for update_time_file
+    alarmclock.update_time_file() # test call for update_time_file
     #alarmclock.update_clock_display() # test call for updateing the clock display
     #alarmclock.init_alarm_ring() # test to init alarm ring
     # new up 4 digit objects for the 4 clock displays
@@ -97,7 +97,7 @@ def main_loop():
     # main loop, this is really starting to smell like a micro controller program!
     while True:
         clockdisplay.set_displayvalue(alarmclock.update_clock_display()) # update the values with the current time
-        clockdisplay.draw_bus() # update the current time to the display bus 
+        clockdisplay.draw_bus() # update the current time to the display bus
 
 # weird if statment that python needs to run it's main function
 if __name__ == "__main__":
