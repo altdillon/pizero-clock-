@@ -36,6 +36,15 @@ class AlarmClock:
         # enter the inital callback for _check_alarm
         s.enter(1,1,_check_alarm,())
 
+    def read_time(self): # returns true if it's time to sound the alarm.  This is going to be called several times a second
+        out=false
+        if self.ringTime :  # make sure that the ring time member function is defined.  Idealy the first call to update_time_file occures before the first call to this function
+            #see if the current is with +- 1 second of the time that the object has saved
+            now=datetime.datetime.now()
+            if now == self.ringTime :  # this makes my common sence tingle, this might make some trouble in the future
+                out=true 
+
+        return out
 
 
     def update_time_file(self):
