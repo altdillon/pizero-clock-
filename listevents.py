@@ -35,7 +35,7 @@ def get_credentials():
     #credential_path = os.path.join(credential_dir,'calendar-python-quickstart.json')
 
     # stupid hacky way that I came up with to fix an issue with running this app as root
-    credential_path = os.path.join('.credentials','calendar-python-quickstart.json') 
+    credential_path = os.path.join('./credentials','calendar-python-quickstart.json') 
 
     store = Storage(credential_path)
     credentials = store.get()
