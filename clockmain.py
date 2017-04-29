@@ -7,6 +7,9 @@ import time
 import json
 import sched
 import os.path
+import daemon # import from python deamon
+
+# alarm clock class is the class that actually runs the allarm clock
 
 class AlarmClock:
 
@@ -114,7 +117,7 @@ def main_loop():
         if alarmclock.read_time() :
             clockdisplay.play_buzzer(5) # play buzzer for 5 seconds
 
-    # todo next time this code is editied: init the event que for the two nested methods 
+    # todo next time this code is editied: init the event que for the two nested methods
 
     # main loop, this is really starting to smell like a micro controller program!
     while True:
@@ -123,4 +126,8 @@ def main_loop():
 
 # weird if statment that python needs to run it's main function
 if __name__ == "__main__":
-    main_loop()
+    # init stuff before we can start the main loop:
+    # http://stackoverflow.com/questions/1369526/what-is-the-python-keyword-with-used-for
+    # https://docs.python.org/3/whatsnew/2.6.html#pep-343-the-with-statement
+    with deamon.DaemonContext():
+        main_loop()
