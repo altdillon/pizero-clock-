@@ -31,6 +31,7 @@ class Display:
 		self.delay=0.005 # delay between drawings
 		wiringpi.wiringPiSetup() # setup the wiringpi lib for gpio
 		self.init_controlbits() # clear all the pins and make sure everythings blank
+		self.alarmPin=25 # pin for controlling the alarm clock 
 
 	# set all the pins as outputs and then make them all low
 	def init_controlbits(self):
@@ -63,7 +64,7 @@ class Display:
 			#print(pins[s]) # print out the current scode
 			wiringpi.pinMode(pins[s],OUTPUT)
 
-	def play_buzzer(self,durration): # play the buzzer for a period of time 
+	def play_buzzer(self,durration): # play the buzzer for a period of time
 		print("playing the buzzer!!!")
 
 	# scan through all the digits and write them to the segment bus
