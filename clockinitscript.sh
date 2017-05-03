@@ -8,7 +8,7 @@
 # Short-Description: Manage my cool stuff
 ### END INIT INFO
 
-PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:/home/pi/pizero-clock- # added pizeo path to path value
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/bin:
 
 . /lib/init/vars.sh
 . /lib/lsb/init-functions
@@ -18,8 +18,8 @@ case "$1" in
   start)
     log_begin_msg "Starting the clock"
 # do something
-  sudo python clockmain.py
-  echo $PATH
+  sudo python /home/pi/pizero-clock-/clockmain.py
+
 
     log_end_msg $?
     exit 0
