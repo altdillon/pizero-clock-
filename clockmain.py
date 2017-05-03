@@ -108,6 +108,8 @@ def main_loop():
     # new up a display object, with the digit objects
     clockdisplay=Display([d_one,d_two,d_three,d_four])
 
+    alarmclock.update_time_file() # update time time file 
+
     # setup events for geting time from google api and seeing if it's time to getup
     def update_wakeup_from_googleapi():
         alarmclock.update_time_file()
@@ -130,5 +132,6 @@ if __name__ == "__main__":
     # http://stackoverflow.com/questions/1369526/what-is-the-python-keyword-with-used-for
     # https://docs.python.org/3/whatsnew/2.6.html#pep-343-the-with-statement
     #http://www.tldp.org/HOWTO/HighQuality-Apps-HOWTO/boot.html
-    #with daemon.DaemonContext():
+
+    with daemon.DaemonContext():
         main_loop()
