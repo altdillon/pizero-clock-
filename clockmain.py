@@ -96,6 +96,7 @@ class AlarmClock:
 def main_loop():
     # init all the objects that we'll need for running an alarm clock
     alarmclock=AlarmClock()
+    alarmclock.update_time_file() # inital call to get a new update file 
     s = sched.scheduler(time.time, time.sleep)
     #alarmclock.update_time_file() # test call for update_time_file
     #alarmclock.update_clock_display() # test call for updateing the clock display
