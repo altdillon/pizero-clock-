@@ -19,6 +19,7 @@ case "$1" in
     log_begin_msg "Starting the clock"
 # do something
   sudo python clockmain.py
+  echo $PATH
 
     log_end_msg $?
     exit 0
@@ -27,7 +28,7 @@ case "$1" in
     log_begin_msg "stopping the service"
 
     # do something to kill the service or cleanup or nothing
-    sudo kill -9 $(pidof python) # might also kill a bunch of other python scripts 
+    sudo kill -9 $(pidof python) # might also kill a bunch of other python scripts
 
     log_end_msg $?
     exit 0
