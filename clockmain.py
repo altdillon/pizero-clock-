@@ -108,7 +108,7 @@ def main_loop():
     # new up a display object, with the digit objects
     clockdisplay=Display([d_one,d_two,d_three,d_four])
 
-    alarmclock.update_time_file() # update time time file 
+    #alarmclock.update_time_file() # update time time file, test call
 
     # setup events for geting time from google api and seeing if it's time to getup
     def update_wakeup_from_googleapi():
@@ -120,6 +120,9 @@ def main_loop():
             clockdisplay.play_buzzer(5) # play buzzer for 5 seconds
 
     # todo next time this code is editied: init the event que for the two nested methods
+    # init event que
+    s.enter(3,1,update_wakeup_from_googleapi,())
+    s.enter(3,1,check_wakeup,())
 
     # main loop, this is really starting to smell like a micro controller program!
     while True:
