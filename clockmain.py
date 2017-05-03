@@ -129,5 +129,6 @@ if __name__ == "__main__":
     # init stuff before we can start the main loop:
     # http://stackoverflow.com/questions/1369526/what-is-the-python-keyword-with-used-for
     # https://docs.python.org/3/whatsnew/2.6.html#pep-343-the-with-statement
-    with daemon.DaemonContext():
+    #http://www.tldp.org/HOWTO/HighQuality-Apps-HOWTO/boot.html
+    #with daemon.DaemonContext():
         main_loop()
